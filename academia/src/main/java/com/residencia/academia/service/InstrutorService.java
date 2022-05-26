@@ -31,7 +31,7 @@ public class InstrutorService {
 		return instrutorDTO;
 	}
 
-	private InstrutorDTO converterEntidadeParaDTO(Instrutor instrutor) {
+	public InstrutorDTO converterEntidadeParaDTO(Instrutor instrutor) {
 		InstrutorDTO instrutorDTO = new InstrutorDTO();
 		instrutorDTO.setDataNascimento(instrutor.getDataNascimento());
 		instrutorDTO.setNomeInstrutor(instrutor.getNomeInstrutor());
@@ -56,14 +56,28 @@ public class InstrutorService {
 		return instrutorDTO;
 	}
 
-	private Instrutor converterDTOParaEntidade(InstrutorDTO instrutorDTO) {
+	public Instrutor converterDTOParaEntidade(InstrutorDTO instrutorDTO) {
 		Instrutor instrutor = new Instrutor();
 		instrutor.setDataNascimento(instrutorDTO.getDataNascimento());
 		instrutor.setIdInstrutor(instrutorDTO.getIdInstrutor());
 		instrutor.setNomeInstrutor(instrutorDTO.getNomeInstrutor());
 		instrutor.setRg(instrutorDTO.getRg());
 		instrutor.setTitulacaoInstrutor(instrutorDTO.getTitulacaoInstrutor());
-
+		
+		List<Turma>Turmalist = new ArrayList<>();
+		if (null != instrutorDTO.getTurmaDTOList()) {
+			for (TurmaDTO turmaDTO : instrutorDTO.getTurmaDTOList()) {
+				Turma turma = new Turma();
+				turma.setDataFimTurma(turmaDTO.getDataFimTurma());
+				turma.setDataInicioTurma(turmaDTO.getDataInicioTurma());
+				turma.setDuracaoTurma(turmaDTO.getDuracaoTurma());
+				turma.setHorarioTurma(turmaDTO.getHorarioTurma());
+				turma.setIdTurma(turmaDTO.getIdTurma());
+				
+				Turmalist.add(turma);
+			}
+			instrutor.setTurmaList(Turmalist);
+		}
 		return instrutor;
 
 	}

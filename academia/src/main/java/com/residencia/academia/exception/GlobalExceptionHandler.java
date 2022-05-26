@@ -40,7 +40,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	@Override
 	public ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers,
 			HttpStatus status, WebRequest request) {
-
 		return buildErrorResponse(ex, status, request);
 	}
 }

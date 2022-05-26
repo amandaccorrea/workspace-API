@@ -47,11 +47,11 @@ public class Turma {
 	//@JsonManagedReference
 	//@JsonIgnore
 	//@JsonBackReference
-	@JoinColumn(name="idInstrutor", columnDefinition = "idInstrutor")
+	@JoinColumn(name="id_instrutor", columnDefinition = "id_instrutor")
 	private	Instrutor instrutor;
 	
 	@OneToOne
-	@JoinColumn(name="idAtividade", columnDefinition = "idAtividade")
+	@JoinColumn(name="id_atividade", columnDefinition = "id_atividade")
 	private Atividade atividade;
 
 	public Atividade getAtividade() {

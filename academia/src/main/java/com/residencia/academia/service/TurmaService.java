@@ -5,7 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.residencia.academia.dto.AtividadeDTO;
+import com.residencia.academia.dto.InstrutorDTO;
 import com.residencia.academia.dto.TurmaDTO;
+import com.residencia.academia.entity.Atividade;
+import com.residencia.academia.entity.Instrutor;
 import com.residencia.academia.entity.Turma;
 import com.residencia.academia.repository.TurmaRepository;
 
@@ -14,6 +18,10 @@ public class TurmaService {
 
 	@Autowired
 	private TurmaRepository turmaRepository;
+	@Autowired
+	private InstrutorService instrutorService;
+	@Autowired
+	private AtividadeService atividadeService;
 
 	public List<Turma> findAll() {
 		return turmaRepository.findAll();
@@ -36,8 +44,12 @@ public class TurmaService {
 			turmaDTO.setDuracaoTurma(turma.getDuracaoTurma());
 			turmaDTO.setIdTurma(turma.getIdTurma());
 			turmaDTO.setHorarioTurma(turma.getHorarioTurma());
-			//turmaDTO.setInstrutor(turma.getInstrutor());
-			//turmaDTO.setAtividade(turma.getAtividade());;
+			
+			InstrutorDTO instrutorDTO = instrutorService.findDTOById(turma.getInstrutor().getIdInstrutor());
+			turmaDTO.setInstrutorDTO(instrutorDTO);
+			
+			AtividadeDTO atividadeDTO = atividadeService.findDTOById(turma.getAtividade().getIdAtividade());
+			turmaDTO.setAtividadeDTO(atividadeDTO);
 		
 		return turmaDTO;
 	}
@@ -49,8 +61,12 @@ public class TurmaService {
 		turma.setDuracaoTurma(turmaDTO.getDuracaoTurma());
 		turma.setHorarioTurma(turmaDTO.getHorarioTurma());
 		turma.setIdTurma(turmaDTO.getIdTurma());
-		//turma.setInstrutor(turmaDTO.getInstrutor());
-		//turma.setAtividade(turmaDTO.getAtividade());
+		//turma.setInstrutor(instrutorService.converterDTOParaEntidade(turmaDTO.getInstrutorDTO()));
+		Instrutor instrutor = instrutorService.findById(turmaDTO.getInstrutorDTO().getIdInstrutor());
+		turma.setInstrutor(instrutor);
+		
+		Atividade atividade = atividadeService.findById(turmaDTO.getAtividadeDTO().getIdAtividade());
+		turma.setAtividade(atividade);
 		
 		return turma;
 	}

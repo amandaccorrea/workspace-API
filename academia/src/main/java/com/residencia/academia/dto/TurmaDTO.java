@@ -13,6 +13,10 @@ public class TurmaDTO {
 	private Date dataInicioTurma;
 
 	private Date dataFimTurma;
+	
+	private InstrutorDTO instrutorDTO;
+	
+	private AtividadeDTO atividadeDTO;
 
 
 	public Integer getIdTurma() {
@@ -61,5 +65,20 @@ public class TurmaDTO {
 		this.horarioTurma = horarioTurma;
 	}
 
+	public InstrutorDTO getInstrutorDTO() {
+		return instrutorDTO;
+	}
+
+	public void setInstrutorDTO(InstrutorDTO instrutorDTO) {
+		this.instrutorDTO = instrutorDTO;
+	}
+
+	public AtividadeDTO getAtividadeDTO() {
+		return atividadeDTO;
+	}
+
+	public void setAtividadeDTO(AtividadeDTO atividadeDTO) {
+		this.atividadeDTO = atividadeDTO;
+	}
 	
 }
