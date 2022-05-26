@@ -47,7 +47,7 @@ public class InstrutorController {
 			//return new ResponseEntity<>(instrutorService.findInstrutorById(id), HttpStatus.OK);
 			Instrutor instrutor = instrutorService.findById(id);
 			if (null == instrutor) 
-				return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+				throw new NoSuchElementFoundException("Não foi encontrado Instrutor com o id " + id);
 			else
 			return new ResponseEntity<>(instrutor, HttpStatus.OK);
 		}
