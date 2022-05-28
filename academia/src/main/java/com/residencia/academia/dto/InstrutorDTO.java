@@ -3,8 +3,10 @@ package com.residencia.academia.dto;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -12,12 +14,14 @@ import com.residencia.academia.entity.Instrutor;
 
 
 public class InstrutorDTO {
+	@NonNull
 	private Integer idInstrutor;
 
 	private Integer rg;
 
 	private String nomeInstrutor;
 
+	@DateTimeFormat(pattern= "yyyyMMdd")
 	private Date dataNascimento;
 
 	private Integer titulacaoInstrutor;

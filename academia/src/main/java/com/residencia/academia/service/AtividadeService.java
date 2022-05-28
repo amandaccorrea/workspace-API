@@ -12,7 +12,6 @@ import com.residencia.academia.entity.Atividade;
 import com.residencia.academia.entity.Turma;
 import com.residencia.academia.repository.AtividadeRepository;
 
-
 @Service
 public class AtividadeService {
 	
