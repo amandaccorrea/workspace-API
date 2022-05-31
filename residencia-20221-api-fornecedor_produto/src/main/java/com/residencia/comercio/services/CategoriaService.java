@@ -19,6 +19,12 @@ public class CategoriaService {
 	@Autowired
 	CategoriaRepository categoriaRepository;
 	
+	@Autowired
+	ArquivoService arquivoService;
+	
+	@Autowired
+	EmailService emailService;
+	
 	public List<Categoria> findAllCategoria(){
 		return categoriaRepository.findAll();
 	}
@@ -132,7 +138,7 @@ public class CategoriaService {
 		Categoria categoriaBD = categoriaRepository.save(categoriaConvertida);
 		return null;
 }*/
-	public Categoria saveCategoriaFotoP(String categoria, MultipartFile file) {
+	public Categoria saveCategoriaFoto(String categoria, MultipartFile file) throws Exception {
 		
 		Categoria categoriaConvertida = new Categoria();
 		
@@ -146,7 +152,7 @@ public class CategoriaService {
 			System.out.println("Ocorreu um erro na conversão");
 		}
 		
-		Categoria categoriaBD = categoriaRepository.save(categoriaConvertida);
+		
 		
 		/*
 		  List<String> nomesImagensList =  categoriaRepository.findAllByNomeImagem(file.getOriginalFilename());
@@ -156,10 +162,22 @@ public class CategoriaService {
 		  }
 		  
 		 */
-		
+		Categoria categoriaBD = categoriaRepository.save(categoriaConvertida);
 		categoriaBD.setNomeImagem(categoriaBD.getIdCategoria()+ "_"+ file.getOriginalFilename());
-		Categoria categoriAtualizada = categoriaRepository.save(categoriaBD);
-		return null;
+		Categoria categoriaAtualizada = categoriaRepository.save(categoriaBD);
+		
+		try {
+			arquivoService.criarArquivo(categoriaBD.getIdCategoria() +"_"+file.getOriginalFilename(),file);
+		} catch (Exception e) {
+			throw new Exception("Ocorreu um erro ao tentar copiar o arquivo - " + e.getStackTrace());
+		}
+		//String corpoEmail= "Foi cadastrada uma nova categoria"+categoriaAtualizada.toString();
+		//emailService.enviarEmailTexto("teste@teste.com","Cadastro de Categoria", corpoEmail);
+		
+		String corpoEmail= "<h1>Hello!!</h1>"+categoriaAtualizada.toString();
+		emailService.enviarEmailHtml("amandacorrea625@gmail.com","Cadastro de Categoria", corpoEmail);
+		return categoriaAtualizada;
 }
+	
 	
 }

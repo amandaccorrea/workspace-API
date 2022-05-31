@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -28,8 +29,13 @@ public class Produto {
 	@Column(name = "sku")
 	private String sku;
 	
+	@NotBlank(message = "O nome do produto não pode estar vazio")
+	@Pattern(regexp = "^[A-Z]+(.)*")
 	@Column(name = "nome_produto")
 	private String nomeProduto;
+	
+	@Column(name = "imagem")
+	private String imagemProduto;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_fornecedor", referencedColumnName = "id_fornecedor")
@@ -77,6 +83,14 @@ public class Produto {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public String getImagemProduto() {
+		return imagemProduto;
+	}
+
+	public void setImagemProduto(String imagemProduto) {
+		this.imagemProduto = imagemProduto;
 	}
 	
 	

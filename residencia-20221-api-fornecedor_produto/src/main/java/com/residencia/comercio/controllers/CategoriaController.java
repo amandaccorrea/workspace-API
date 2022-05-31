@@ -2,10 +2,13 @@ package com.residencia.comercio.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +27,7 @@ import com.residencia.comercio.services.CategoriaService;
 
 @RestController
 @RequestMapping("/categoria")
+@Validated
 public class CategoriaController {
 	@Autowired
 	CategoriaService categoriaService;
@@ -50,25 +54,25 @@ public class CategoriaController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Categoria> saveCategoria(@RequestBody Categoria categoria) {
+	public ResponseEntity<Categoria> saveCategoria(@RequestBody @Valid Categoria categoria) {
 		Categoria novoCategoria = categoriaService.saveCategoria(categoria);
 		return new ResponseEntity<>(novoCategoria, HttpStatus.CREATED);
 	}
 
 	@PostMapping("/dto")
-	public ResponseEntity<CategoriaDTO> saveCategoriaDTO(@RequestBody CategoriaDTO categoriaDTO) {
+	public ResponseEntity<CategoriaDTO> saveCategoriaDTO(@RequestBody @Valid CategoriaDTO categoriaDTO) {
 		CategoriaDTO novoCategoriaDTO = categoriaService.saveCategoriaDTO(categoriaDTO);
 		return new ResponseEntity<>(novoCategoriaDTO, HttpStatus.CREATED);
 	}
 	
 	@PostMapping(value = "/com-foto", consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE})
-	public ResponseEntity<Categoria> saveCategoriaFoto(@RequestPart("categoria") String categoria, @RequestPart("file") MultipartFile file){
-		Categoria novoCategoria = categoriaService.saveCategoriaFotoP(categoria, file);
+	public ResponseEntity<Categoria> saveCategoriaFoto(@RequestPart("categoria") String categoria, @RequestPart("file") MultipartFile file) throws Exception{
+		Categoria novoCategoria = categoriaService.saveCategoriaFoto(categoria, file);
 		return new ResponseEntity<>(novoCategoria, HttpStatus.CREATED);
 	}
 	
 	@PutMapping
-	public ResponseEntity<Categoria> updateCategoria(@RequestBody Categoria categoria) {
+	public ResponseEntity<Categoria> updateCategoria(@RequestBody @Valid Categoria categoria) {
 		Categoria novoCategoria = categoriaService.updateCategoria(categoria);
 		return new ResponseEntity<>(novoCategoria, HttpStatus.OK);
 	}

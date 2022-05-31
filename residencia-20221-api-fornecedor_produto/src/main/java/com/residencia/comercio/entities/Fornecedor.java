@@ -11,7 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.br.CNPJ;
+import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -28,13 +34,16 @@ public class Fornecedor {
 	private Integer idFornecedor;
 
 	@Column(name = "cnpj")
-	@NotEmpty(message = "O número do CNPJ não pode ficar em branco.")
+	@CNPJ
+	//@NotEmpty(message = "O número do CNPJ não pode ficar em branco.")
 	//@Digits(message="O CNPJ deve conter 14 números.", fraction = 0, integer = 14)
-	private Integer cnpj;
-
+	private String cnpj;
+	
+	//@NotBlank
 	@Column(name = "tipo")
 	private String tipo;
-
+	
+	//@NotBlank(message = "A razão social não pode estar vazio")
 	@Column(name = "razao_social")
 	private String razaoSocial;
 	
@@ -44,9 +53,11 @@ public class Fornecedor {
 	@Column(name = "telefone")
 	private String telefone;
 	
+	//@javax.validation.constraints.Email
 	@Column(name = "email")
 	private String email;
 	
+	//@NotBlank(message = "O nome fantasia não pode estar vazio")
 	@Column(name = "nome_fantasia")
 	private String nomeFantasia;
 	
@@ -95,11 +106,11 @@ public class Fornecedor {
 		this.idFornecedor = idFornecedor;
 	}
 
-	public Integer getCnpj() {
+	public String getCnpj() {
 		return cnpj;
 	}
 
-	public void setCnpj(Integer cnpj) {
+	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
 
@@ -175,7 +186,7 @@ public class Fornecedor {
 		this.logradouro = logradouro;
 	}
 
-	public Integer getNumero() {
+	public Integer getNumero(Integer numero) {
 		return numero;
 	}
 
@@ -214,5 +225,15 @@ public class Fornecedor {
 	public void setDataAbertura(Date dataAbertura) {
 		this.dataAbertura = dataAbertura;
 	}
+
+	@Override
+	public String toString() {
+		return "Fornecedor [idFornecedor=" + idFornecedor + ", cnpj=" + cnpj + ", tipo=" + tipo + ", razaoSocial="
+				+ razaoSocial + ", uf=" + uf + ", telefone=" + telefone + ", email=" + email + ", nomeFantasia="
+				+ nomeFantasia + ", statusSituacao=" + statusSituacao + ", bairro=" + bairro + ", logradouro="
+				+ logradouro + ", numero=" + numero + ", complemento=" + complemento + ", cep=" + cep + ", municipio="
+				+ municipio + ", dataAbertura=" + dataAbertura + ", produtoList=" + produtoList + "]";
+	}
+	
 	
 }
