@@ -1,9 +1,6 @@
 package com.residencia.comercio.services;
 
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.Assert.assertEquals;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -166,47 +163,28 @@ public class FornecedorService {
 	}
 
 	
-	public  CadastroEmpresaReceitaDTO consultarDadosPorCnpj(String cnpj) {
+	public CadastroEmpresaReceitaDTO consultarDadosPorCnpj(String cnpj) {
 		RestTemplate restTemplate = new RestTemplate();
-		String criterion = "{\"{cnpj}\"}";
-		String uri = "https://www.receitaws.com.br/v1/cnpj/";
-		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(uri).queryParam("criterion", criterion);
+		String uri = "https://www.receitaws.com.br/v1/cnpj/{cnpj}";
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("cnpj", cnpj);
-
-			 CadastroEmpresaReceitaDTO cadastroEmpresaReceitaDTO = restTemplate.getForObject(uri, CadastroEmpresaReceitaDTO.class,builder.build().toUri());
-			 assertEquals (cadastroEmpresaReceitaDTO.getCnpj(), 1, 0);
+		CadastroEmpresaReceitaDTO cadastroEmpresaReceitaDTO = restTemplate.getForObject(uri, CadastroEmpresaReceitaDTO.class,params);
+			return cadastroEmpresaReceitaDTO;
 	}
 	
-	public Fornecedor updateCepFornecedor(Fornecedor fornecedor, CepDTO cepDTO) {
-		fornecedor.setLogradouro(cepDTO.getLogradouro());
-		fornecedor.setBairro(cepDTO.getBairro());
-		fornecedor.setComplemento(cepDTO.getComplemento());
-		fornecedor.setMunicipio(cepDTO.getLocalidade());
-		fornecedor.setUf(cepDTO.getUf());
-		fornecedor.setCep(cepDTO.getCep());
-		
-		return fornecedor;
-	}
 	
 	public CepDTO consultarCepDTO(String cep) {
 		RestTemplate restTemplate = new RestTemplate();
 		//String criterion = "{\"prop\":\"cnpj\",\"value\":\"{cnpj}\"}";
 		String uri = "https://viacep.com.br/ws/{cep}/json";
-		//Map<String, String> params = new HashMap<String, String>();
-		//params.put("cep", cep);
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("cep", cep);
 
-		return restTemplate.getForObject(uri, CepDTO.class);
+		 CepDTO cepDTO = restTemplate.getForObject(uri, CepDTO.class,params);
+		return cepDTO;
+		
 	}
 	
-	/*public boolean CNPJValidFormatted(String cnpj) {
-		if (cnpj.charAt(2) != '.' || cnpj.charAt(6) != '.' || cnpj.charAt(10) != '/' || cnpj.charAt(15) != '-' || cnpj.length() != 18) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}*/
 
 	// 00776574000156
 	//{"cep":"25651078"}

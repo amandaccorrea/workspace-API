@@ -68,18 +68,18 @@ public class FornecedorController {
 			@ApiResponse(responseCode = "400", description = "Erro ao realizar o Get.")
 	})
 	@GetMapping("/cnpj/{cnpj}")
-	public ResponseEntity<CadastroEmpresaReceitaDTO> consultarDadosPorCnpj(String cnpj) {
+	public ResponseEntity<CadastroEmpresaReceitaDTO> consultarDadosPorCnpj(@PathVariable String cnpj) {
 		CadastroEmpresaReceitaDTO cadEmpresaDTO = fornecedorService.consultarDadosPorCnpj(cnpj);
-		if(null != cadEmpresaDTO)
+		if(null == cadEmpresaDTO.getCnpj())
 			throw new NoSuchElementFoundException("Não foi encontrado dados para esse CNPJ " + cnpj);
 		else 
 			return new ResponseEntity<>(cadEmpresaDTO, HttpStatus.OK);
 	}
 	
 	@GetMapping("/cep/{cep}")
-	public ResponseEntity<CepDTO> consultarCep(String cep){
+	public ResponseEntity<CepDTO> consultarCep(@PathVariable String cep){
 		CepDTO cepDTO = fornecedorService.consultarCepDTO(cep);
-		if(null != cepDTO)
+		if(null == cepDTO.getCep())
 			throw new NoSuchElementFoundException("Não foi encontrado dados para esse CEP " + cep);
 		else 
 			return new ResponseEntity<>(cepDTO, HttpStatus.OK);
@@ -130,18 +130,13 @@ public class FornecedorController {
 			@ApiResponse(responseCode = "200", description = "Atualização realizado com sucesso."),
 			@ApiResponse(responseCode = "400", description = "Erro ao atualizar um fornecedor.")
 	})
+	
 	@PutMapping
 	public ResponseEntity<Fornecedor> updateFornecedor(@RequestBody @Valid Fornecedor fornecedor) {
 		Fornecedor novoFornecedor = fornecedorService.updateFornecedor(fornecedor);
 		return new ResponseEntity<>(novoFornecedor, HttpStatus.OK);
 	}
 	
-	@PutMapping("/{id}")
-	@Operation(summary = "Atualizar o endereço de um Fornecedor através da API Externa ViaCEP.")
-	public ResponseEntity<Fornecedor> updateAddressFornecedor(@PathVariable Integer id, @RequestParam String cep) {
-		return new ResponseEntity<>(fornecedorService.updateFornecedor(fornecedorService.updateCepFornecedor(
-				fornecedorService.findFornecedorById(id), fornecedorService.consultarCepDTO(cep))), HttpStatus.OK);
-	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteFornecedor(@PathVariable Integer id) {

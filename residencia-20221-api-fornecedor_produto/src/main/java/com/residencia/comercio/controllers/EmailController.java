@@ -43,7 +43,33 @@ public class EmailController {
             MimeMessageHelper helper = new MimeMessageHelper(mail);
             helper.setTo("amandacorrea625@gmail.com");
             helper.setSubject("Teste Envio de e-mail");
-            helper.setText("<h1>Hello</h1>", true);
+            helper.setText("<style>\r\n"
+            		+ "header{\r\n"
+            		+ "    text-align: center;\r\n"
+            		+ "  background-color: #fcb39d;\r\n"
+            		+ "  padding: 4rem;\r\n"
+            		+ "  color: rgb(206, 188, 223);\r\n"
+            		+ "}\r\n"
+            		+ "div{\r\n"
+            		+ "    text-align: center;\r\n"
+            		+ "  background-color: #ecdba3;\r\n"
+            		+ "  color: black;\r\n"
+            		+ "}\r\n"
+            		+ "img{\r\n"
+            		+ "    border-radius: 50%;\r\n"
+            		+ "  width: 14rem;\r\n"
+            		+ "  height: 14rem;\r\n"
+            		+ "}\r\n"
+            		+ "    </style>"
+            		+ "<header>\r\n"
+            		+ "    <h1>Hello!!</h1>\r\n"
+            		+ "    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus repellendus hic nobis veniam dignissimos corrupti incidunt quaerat doloremque minima provident?</p>\r\n"
+            		+ "    </header>\r\n"
+            		+ "    <div>\r\n"
+            		+ "    <h3>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus.</h3>\r\n"
+            		+ "    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore sapiente veniam corporis tempore ipsam cumque itaque nemo eos quas placeat?</p>\r\n"
+            		+ "    <img src=\"https://www.bonde.com.br/img/bondenews/2019/12/img_1_75_1491.jpg\" alt=\"cachorrinho fofinho\">\r\n"
+            		+ "    </div>", true);
             mailSender.send(mail);
 
             return "OK";

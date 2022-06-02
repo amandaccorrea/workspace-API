@@ -1,5 +1,6 @@
 package com.residencia.comercio.dtos;
 
+
 public class CadastroEmpresaReceitaDTO {
 	
 	private String situacao;
@@ -23,6 +24,7 @@ public class CadastroEmpresaReceitaDTO {
 	private String bairro;
 	private String municipio;
 	private String uf;
+	
 	public String getSituacao() {
 		return situacao;
 	}
