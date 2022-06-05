@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="com.residencia.academia.entity.Instrutor"/>
-    <fullyQualifiedTypeName name="com.residencia.academia.entity.Atividade"/>
-    <fullyQualifiedTypeName name="com.residencia.academia.dto.InstrutorDTO"/>
-    <fullyQualifiedTypeName name="com.residencia.academia.dto.AtividadeDTO"/>
-    <fullyQualifiedTypeName name="javax.persistence.JoinColumn"/>
     <fullyQualifiedTypeName name="javax.persistence.ManyToOne"/>
     <fullyQualifiedTypeName name="com.residencia.comercio.repositories.ProdutoRepository"/>
-    <fullyQualifiedTypeName name="com.residencia.comercio.services.ProdutoService"/>
     <fullyQualifiedTypeName name="com.residencia.comercio.exceptions.NoSuchElementFoundException"/>
     <fullyQualifiedTypeName name="com.residencia.comercio.dtos.CategoriaDTO"/>
     <fullyQualifiedTypeName name="com.residencia.comercio.entities.Categoria"/>
     <fullyQualifiedTypeName name="com.residencia.comercio.services.CategoriaService"/>
     <fullyQualifiedTypeName name="com.residencia.comercio.entities.Produto"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="com.residencia.comercio.dtos.ProdutoDTO"/>
     <fullyQualifiedTypeName name="org.springframework.web.client.RestTemplate"/>
     <fullyQualifiedTypeName name="java.util.Map"/>
@@ -60,4 +52,12 @@
     <fullyQualifiedTypeName name="java.nio.file.Paths"/>
     <fullyQualifiedTypeName name="org.springframework.mail.SimpleMailMessage"/>
     <fullyQualifiedTypeName name="com.residencia.comercio.dtos.CadastroEmpresaReceitaDTO"/>
+    <fullyQualifiedTypeName name="javax.persistence.Entity"/>
+    <fullyQualifiedTypeName name="javax.persistence.Table"/>
+    <fullyQualifiedTypeName name="com.residencia.comercio.entities.Estoque"/>
+    <fullyQualifiedTypeName name="javax.persistence.OneToOne"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="com.residencia.comercio.services.ProdutoService"/>
+    <fullyQualifiedTypeName name="com.residencia.comercio.dtos.EstoqueProdutoDTO"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
 </qualifiedTypeNameHistroy>
